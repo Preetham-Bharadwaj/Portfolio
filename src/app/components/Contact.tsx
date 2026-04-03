@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
@@ -19,6 +19,19 @@ export default function Contact() {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
+  const [highlighted, setHighlighted] = useState(false);
+
+  // Listen for contact button click event
+  useEffect(() => {
+    const handleContactClick = () => {
+      setHighlighted(true);
+      // Remove highlight after 2 seconds
+      setTimeout(() => setHighlighted(false), 2000);
+    };
+
+    window.addEventListener("contactButtonClicked", handleContactClick);
+    return () => window.removeEventListener("contactButtonClicked", handleContactClick);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +95,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative py-24 px-6 overflow-hidden"
+      className={`relative py-24 px-6 overflow-hidden transition-all duration-500 ${highlighted ? 'ring-2 ring-[#00d4ff] ring-opacity-50' : ''}`}
       style={{ background: "#0a0e27" }}
     >
       {/* Background accents */}

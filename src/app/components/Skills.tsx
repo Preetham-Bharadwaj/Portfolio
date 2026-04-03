@@ -1,33 +1,26 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const categories = ["All", "Frontend", "Backend", "DevOps", "AI/ML", "Tools"];
+const categories = ["All", "Frontend", "Backend", "DevOps & Tools"];
 
 const skills = [
   // Frontend
-  { name: "HTML", level: 75, category: "Frontend", color: "#00d4ff" },
-  { name: "CSS", level: 70, category: "Frontend", color: "#00d4ff" },
-  { name: "JavaScript", level: 70, category: "Frontend", color: "#00d4ff" },
-  { name: "React.js (Learning)", level: 65, category: "Frontend", color: "#00d4ff" },
-  { name: "Tailwind CSS", level: 75, category: "Frontend", color: "#00d4ff" },
+  { name: "React.js", level: 75, category: "Frontend", color: "#00d4ff" },
+  { name: "JavaScript", level: 80, category: "Frontend", color: "#00d4ff" },
+  { name: "HTML", level: 85, category: "Frontend", color: "#00d4ff" },
+  { name: "CSS", level: 80, category: "Frontend", color: "#00d4ff" },
+  { name: "Tailwind CSS", level: 85, category: "Frontend", color: "#00d4ff" },
   // Backend
-  { name: "Node.js (Learning)", level: 60, category: "Backend", color: "#b000ff" },
-  { name: "Express.js (Learning)", level: 60, category: "Backend", color: "#b000ff" },
-  { name: "Spring Boot", level: 70, category: "Backend", color: "#b000ff" },
-  { name: "MongoDB (Learning)", level: 55, category: "Backend", color: "#b000ff" },
-  // DevOps
-  { name: "Git", level: 80, category: "DevOps", color: "#f0d000" },
-  { name: "GitHub", level: 85, category: "DevOps", color: "#f0d000" },
-  { name: "Docker", level: 50, category: "DevOps", color: "#f0d000" },
-  { name: "Vercel", level: 70, category: "DevOps", color: "#f0d000" },
-  // AI/ML
-  { name: "AI Integration", level: 70, category: "AI/ML", color: "#b000ff" },
-  { name: "API Handling", level: 80, category: "AI/ML", color: "#b000ff" },
-  { name: "Problem Solving", level: 85, category: "AI/ML", color: "#b000ff" },
-  { name: "Not Started Yet", level: 0, category: "AI/ML", color: "#b000ff" },
-  // Tools
-  { name: "VS Code", level: 90, category: "Tools", color: "#00d4ff" },
-  { name: "Linux Basics", level: 60, category: "Tools", color: "#00d4ff" },
+  { name: "Node.js", level: 70, category: "Backend", color: "#b000ff" },
+  { name: "Express.js", level: 70, category: "Backend", color: "#b000ff" },
+  { name: "Spring Boot", level: 75, category: "Backend", color: "#b000ff" },
+  { name: "MongoDB", level: 65, category: "Backend", color: "#b000ff" },
+  // DevOps & Tools
+  { name: "Git", level: 85, category: "DevOps & Tools", color: "#f0d000" },
+  { name: "GitHub", level: 90, category: "DevOps & Tools", color: "#f0d000" },
+  { name: "VS Code", level: 90, category: "DevOps & Tools", color: "#f0d000" },
+  { name: "Docker", level: 60, category: "DevOps & Tools", color: "#f0d000" },
+  { name: "Vercel", level: 75, category: "DevOps & Tools", color: "#f0d000" },
 ];
 
 function SkillBar({ skill, index }: { skill: (typeof skills)[0]; index: number }) {

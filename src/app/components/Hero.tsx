@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Github, Linkedin, Mail, Instagram } from "lucide-react";
 import StarCanvas from "./StarCanvas";
+import ContactMeButton from "./ContactMeButton";
 
 const titles = [
   "Software Developer",
@@ -66,7 +67,14 @@ export default function Hero() {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
@@ -397,34 +405,7 @@ export default function Hero() {
           >
             VIEW MY WORK
           </motion.button>
-          <motion.button
-            onClick={() => scrollTo("contact")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            className="px-8 py-3 rounded-full"
-            style={{
-              fontFamily: "Cabin, sans-serif",
-              fontWeight: 700,
-              fontSize: "0.95rem",
-              background: "transparent",
-              color: "#f8f9fa",
-              border: "1px solid rgba(240,208,0,0.6)",
-              boxShadow: "0 0 15px rgba(240,208,0,0.15)",
-              letterSpacing: "0.08em",
-              cursor: "pointer",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(240,208,0,0.9)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 0 25px rgba(240,208,0,0.3)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(240,208,0,0.6)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "0 0 15px rgba(240,208,0,0.15)";
-            }}
-          >
-            CONTACT ME
-          </motion.button>
+          <ContactMeButton />
         </motion.div>
 
         {/* Social Links */}
