@@ -65,15 +65,16 @@ export default function Contact() {
 
   const inputStyle = {
     fontFamily: "Cabin, sans-serif",
-    fontSize: "0.9rem",
+    fontSize: "1rem",
     color: "#f8f9fa",
     background: "rgba(255,255,255,0.04)",
     border: "1px solid rgba(255,255,255,0.1)",
     borderRadius: "12px",
-    padding: "12px 16px",
+    padding: "14px 16px",
     width: "100%",
     outline: "none",
     transition: "all 0.3s",
+    minHeight: "48px", // Better touch target for mobile
   };
 
   const focusStyle = {

@@ -227,7 +227,7 @@ export default function About() {
                   "radial-gradient(ellipse at center, rgba(0,212,255,0.05) 0%, transparent 70%)",
               }}
             />
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
               {techIcons.map(({ Icon, label, color }, i) => (
                 <motion.div
                   key={label}
@@ -242,7 +242,7 @@ export default function About() {
                     stiffness: 300,
                     damping: 20,
                   }}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl cursor-pointer"
+                  className="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-4 rounded-xl cursor-pointer"
                   style={{
                     background: "rgba(255,255,255,0.03)",
                     border: `1px solid ${color}22`,
@@ -259,11 +259,11 @@ export default function About() {
                     (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
                   }}
                 >
-                  <Icon className="w-7 h-7" style={{ color }} />
+                  <Icon className="w-5 h-5 sm:w-7 sm:h-7" style={{ color }} />
                   <span
                     style={{
                       fontFamily: "Cabin, sans-serif",
-                      fontSize: "0.65rem",
+                      fontSize: "0.6rem",
                       color: "rgba(248,249,250,0.55)",
                       letterSpacing: "0.05em",
                     }}

@@ -37,8 +37,8 @@ export default function Navbar() {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 80; // Approximate navbar height
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
       const offsetPosition = elementPosition - navbarHeight;
 
       window.scrollTo({
@@ -161,19 +161,27 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
-            style={{ background: "rgba(10,14,39,0.95)", borderTop: "1px solid rgba(0,212,255,0.1)" }}
+            className="md:hidden overflow-hidden absolute top-full left-0 right-0"
+            style={{ 
+              background: "rgba(10,14,39,0.98)", 
+              borderTop: "1px solid rgba(0,212,255,0.1)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              zIndex: 50
+            }}
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-left py-2"
+                  className="text-left py-3 w-full block"
                   style={{
                     fontFamily: "Cabin, sans-serif",
+                    fontSize: "1rem",
                     color: activeSection === link.href ? "#00d4ff" : "#f8f9fa",
                     borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    cursor: "pointer",
                   }}
                 >
                   {link.label}
