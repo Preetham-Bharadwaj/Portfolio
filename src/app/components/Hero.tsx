@@ -36,7 +36,10 @@ export default function Hero() {
       // Auto-complete intro after 3 seconds
       const timer = setTimeout(() => {
         setShowIntro(false);
-        setTimeout(() => setIntroComplete(true), 500);
+        setTimeout(() => {
+          setIntroComplete(true);
+          window.dispatchEvent(new CustomEvent("introComplete"));
+        }, 500);
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -240,7 +243,10 @@ export default function Hero() {
               transition={{ delay: 1 }}
               onClick={() => {
                 setShowIntro(false);
-                setTimeout(() => setIntroComplete(true), 500);
+                setTimeout(() => {
+                  setIntroComplete(true);
+                  window.dispatchEvent(new CustomEvent("introComplete"));
+                }, 500);
               }}
               className="absolute bottom-8 right-8 px-4 py-2 rounded-full text-sm"
               style={{

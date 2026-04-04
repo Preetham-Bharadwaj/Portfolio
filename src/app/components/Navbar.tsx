@@ -14,7 +14,16 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [introComplete, setIntroComplete] = useState(() => {
+    return !!sessionStorage.getItem("introShown");
+  });
   const pillNavRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleIntroComplete = () => setIntroComplete(true);
+    window.addEventListener("introComplete", handleIntroComplete);
+    return () => window.removeEventListener("introComplete", handleIntroComplete);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,8 +61,14 @@ export default function Navbar() {
     }
   };
 
+  if (!introComplete) return null;
+
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {/* Top Bar */}
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
@@ -198,6 +213,6 @@ export default function Navbar() {
           ))}
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
