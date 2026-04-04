@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useReveal } from "../hooks/useReveal";
+import { RESUME_VIEW_LINK, RESUME_DOWNLOAD_LINK } from "../../constants/links";
+import { Eye, Download, FileText } from "lucide-react";
 import {
   Code2,
   Database,
@@ -199,26 +201,93 @@ export default function About() {
             </div>
 
             {/* Download CV button */}
-            <motion.a
-              href="#"
+            <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: false }}
               transition={{ delay: 0.5 }}
-              className="inline-flex items-center gap-3 mt-8 px-6 py-3 rounded-full transition-all duration-300 hover:scale-105"
               style={{
-                fontFamily: "Cabin, sans-serif",
-                fontWeight: 700,
-                fontSize: "0.85rem",
-                background: "rgba(240,208,0,0.1)",
-                border: "1px solid rgba(240,208,0,0.5)",
-                color: "#f0d000",
-                letterSpacing: "0.1em",
-                boxShadow: "0 0 20px rgba(240,208,0,0.1)",
+                display: "flex", flexDirection: "column", gap: "10px",
+                marginTop: "16px",
               }}
             >
-              ↓ DOWNLOAD RESUME
-            </motion.a>
+              {/* Label */}
+              <div style={{
+                display: "flex", alignItems: "center", gap: "8px",
+                marginBottom: "4px",
+              }}>
+                <FileText style={{ width: "14px", height: "14px", color: "#00d4ff" }} />
+                <span style={{
+                  fontFamily: "Cabin, sans-serif",
+                  fontSize: "11px", fontWeight: 700,
+                  color: "#6b7280", letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}>
+                  Resume
+                </span>
+              </div>
+
+              {/* Buttons row */}
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                {/* View Resume */}
+                <a
+                  href={RESUME_VIEW_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex", alignItems: "center", gap: "8px",
+                    padding: "10px 20px", borderRadius: "24px",
+                    background: "linear-gradient(135deg, #00d4ff, #b000ff)",
+                    color: "#fff", fontWeight: 600, fontSize: "0.85rem",
+                    textDecoration: "none", letterSpacing: "0.05em",
+                    fontFamily: "Cabin, sans-serif",
+                    boxShadow: "0 0 20px rgba(0,212,255,0.25)",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 25px rgba(0,212,255,0.3)";
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(0,212,255,0.25)";
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                  }}
+                >
+                  <Eye style={{ width: "15px", height: "15px" }} />
+                  View Resume
+                </a>
+
+                {/* Download Resume */}
+                <a
+                  href={RESUME_DOWNLOAD_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex", alignItems: "center", gap: "8px",
+                    padding: "10px 20px", borderRadius: "24px",
+                    border: "1px solid rgba(0,212,255,0.4)",
+                    color: "#00d4ff", fontWeight: 600, fontSize: "0.85rem",
+                    textDecoration: "none", letterSpacing: "0.05em",
+                    fontFamily: "Cabin, sans-serif", background: "transparent",
+                    boxShadow: "0 0 12px rgba(0,212,255,0.1)",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "rgba(0,212,255,0.08)";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(0,212,255,0.25)";
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 12px rgba(0,212,255,0.1)";
+                    (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                  }}
+                >
+                  <Download style={{ width: "15px", height: "15px" }} />
+                  Download Resume
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Right: Tech Icon Grid */}
