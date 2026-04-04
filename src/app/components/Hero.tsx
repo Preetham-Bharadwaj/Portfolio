@@ -165,7 +165,7 @@ export default function Hero() {
                     style={{
                       display: "inline-block",
                       fontFamily: "Orbitron, sans-serif",
-                      fontSize: "clamp(2rem, 8vw, 4rem)",
+                      fontSize: "clamp(1.5rem, 5vw, 3.5rem)",
                       fontWeight: 900,
                       color: "#f8f9fa",
                       letterSpacing: "0.1em",
@@ -192,7 +192,7 @@ export default function Hero() {
                     style={{
                       display: "inline-block",
                       fontFamily: "Orbitron, sans-serif",
-                      fontSize: "clamp(2rem, 8vw, 4rem)",
+                      fontSize: "clamp(1.5rem, 5vw, 3.5rem)",
                       fontWeight: 900,
                       background: "linear-gradient(135deg, #00d4ff, #b000ff)",
                       WebkitBackgroundClip: "text",
@@ -269,7 +269,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: introComplete ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-0"
+        className="relative w-full min-h-screen flex items-center justify-center overflow-x-hidden pt-32 md:pt-16"
         style={{ background: "#0a0e27" }}
       >
       <StarCanvas />
@@ -284,7 +284,8 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 md:mt-0">
+      <div className="relative z-10 text-center px-6 w-full max-w-5xl mx-auto mt-8 md:mt-0"
+        style={{ overflowWrap: "break-word", wordBreak: "break-word" }}>
         {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -292,7 +293,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           style={{
             fontFamily: "Orbitron, sans-serif",
-            fontSize: "clamp(2.5rem, 8vw, 5.5rem)",
+            fontSize: "clamp(1.8rem, 5vw, 4.5rem)",
             fontWeight: 900,
             color: "#f8f9fa",
             letterSpacing: "0.08em",
@@ -327,7 +328,7 @@ export default function Hero() {
           <span
             style={{
               fontFamily: "Orbitron, sans-serif",
-              fontSize: "clamp(1rem, 3vw, 1.6rem)",
+              fontSize: "clamp(0.85rem, 2.5vw, 1.4rem)",
               fontWeight: 500,
               color: "#00d4ff",
               letterSpacing: "0.05em",
