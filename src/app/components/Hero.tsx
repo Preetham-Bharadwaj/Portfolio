@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Github, Linkedin, Mail, Instagram } from "lucide-react";
 import StarCanvas from "./StarCanvas";
 import ContactMeButton from "./ContactMeButton";
+import MagneticButton from "./MagneticButton";
+import { useScramble } from "../hooks/useScramble";
 
 const titles = [
   "Software Developer",
@@ -17,6 +19,10 @@ export default function Hero() {
   const [typing, setTyping] = useState(true);
   const [showIntro, setShowIntro] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
+
+  // Scramble hooks for name
+  const { text: firstNameText, scramble: scrambleFirstName } = useScramble("PREETHAM");
+  const { text: lastNameText, scramble: scrambleLastName } = useScramble("BHARADWAJ");
 
   useEffect(() => {
     // Check if intro has been shown in this session
@@ -35,6 +41,16 @@ export default function Hero() {
       return () => clearTimeout(timer);
     }
   }, []);
+
+  useEffect(() => {
+    if (!introComplete) return;
+    
+    // Trigger scramble effect after intro completes
+    setTimeout(() => {
+      scrambleFirstName();
+      setTimeout(scrambleLastName, 200);
+    }, 500);
+  }, [introComplete, scrambleFirstName, scrambleLastName]);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -67,14 +83,9 @@ export default function Hero() {
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 80;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      const offset = window.innerWidth < 768 ? 130 : 80;
+      const top = element.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 
@@ -252,7 +263,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: introComplete ? 1 : 0 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-0"
         style={{ background: "#0a0e27" }}
       >
       <StarCanvas />
@@ -267,37 +278,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8"
-          style={{
-            background: "rgba(0,212,255,0.08)",
-            border: "1px solid rgba(0,212,255,0.3)",
-          }}
-        >
-          <motion.span
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-2 h-2 rounded-full"
-            style={{ background: "#00d4ff", boxShadow: "0 0 8px #00d4ff" }}
-          />
-          <span
-            style={{
-              fontFamily: "Cabin, sans-serif",
-              fontSize: "0.8rem",
-              color: "#00d4ff",
-              letterSpacing: "0.15em",
-              fontWeight: 500,
-            }}
-          >
-            OPEN TO WORK
-          </span>
-        </motion.div>
-
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto mt-8 md:mt-0">
         {/* Name */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -313,7 +294,7 @@ export default function Hero() {
             marginBottom: "0.5rem",
           }}
         >
-          PREETHAM{" "}
+          {firstNameText}{" "}
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -325,7 +306,7 @@ export default function Hero() {
               filter: "drop-shadow(0 0 30px rgba(0,212,255,0.4))",
             }}
           >
-            BHARADWAJ
+            {lastNameText}
           </motion.span>
         </motion.h1>
 
@@ -379,11 +360,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1.0, ease: "easeOut" }}
           className="flex flex-wrap items-center justify-center gap-4 mb-12"
         >
-          <motion.button
+          <MagneticButton
             onClick={() => scrollTo("projects")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="px-8 py-3 rounded-full"
             style={{
               fontFamily: "Cabin, sans-serif",
@@ -393,7 +371,6 @@ export default function Hero() {
               color: "#fff",
               boxShadow: "0 0 30px rgba(0,212,255,0.4), 0 0 60px rgba(176,0,255,0.2)",
               letterSpacing: "0.08em",
-              cursor: "pointer",
               border: "none",
             }}
             onMouseEnter={(e) => {
@@ -404,7 +381,7 @@ export default function Hero() {
             }}
           >
             VIEW MY WORK
-          </motion.button>
+          </MagneticButton>
           <ContactMeButton />
         </motion.div>
 

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useReveal } from "../hooks/useReveal";
 
 // Skills organized by category with colors
 const skillsData = {
@@ -45,6 +47,18 @@ function SkillTag({ name, index, color }: { name: string; index: number; color: 
       style={{
         background: `${color}15`,
         border: `1px solid ${color}40`,
+      }}
+      onTouchStart={(e) => {
+        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 16px rgba(0,212,255,0.6)";
+        (e.currentTarget as HTMLElement).style.borderColor = "#00d4ff";
+        (e.currentTarget as HTMLElement).style.color = "#00d4ff";
+      }}
+      onTouchEnd={(e) => {
+        setTimeout(() => {
+          (e.currentTarget as HTMLElement).style.boxShadow = "none";
+          (e.currentTarget as HTMLElement).style.borderColor = "";
+          (e.currentTarget as HTMLElement).style.color = "";
+        }, 400);
       }}
     >
       <span
@@ -111,6 +125,8 @@ function CategoryCard({
 }
 
 export default function Skills() {
+  const [activeCategory, setActiveCategory] = useState("Frontend");
+  const { ref, visible } = useReveal();
   const categories = Object.entries(skillsData);
 
   return (
@@ -118,16 +134,22 @@ export default function Skills() {
       id="skills"
       className="relative py-24 px-6 overflow-hidden"
       style={{ background: "#0d1117" }}
+      ref={ref}
     >
       {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.03) 0%, transparent 50%)",
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,212,255,0.04) 0%, transparent 70%)",
         }}
       />
 
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-7xl mx-auto" style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease"
+      }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

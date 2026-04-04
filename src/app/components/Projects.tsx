@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Github, Star, GitFork } from "lucide-react";
+import TiltCard from "./TiltCard";
+import { useReveal } from "../hooks/useReveal";
 
 const projects = [
   {
@@ -77,14 +79,7 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-      whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <TiltCard
       className="relative rounded-2xl overflow-hidden cursor-default"
       style={{
         background: "rgba(255,255,255,0.02)",
@@ -93,6 +88,16 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+        whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="relative h-full"
+      >
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         <motion.img
@@ -239,16 +244,19 @@ function ProjectCard({ project, index }: { project: (typeof projects)[0]; index:
           </div>
         </div>
       </div>
-    </motion.div>
+      </motion.div>
+    </TiltCard>
   );
 }
 
 export default function Projects() {
+  const { ref, visible } = useReveal();
   return (
     <section
       id="projects"
       className="relative py-24 px-6 overflow-hidden"
       style={{ background: "linear-gradient(180deg, #0a0e27 0%, #0d1235 50%, #0a0e27 100%)" }}
+      ref={ref}
     >
       {/* Background accents */}
       <div
@@ -258,7 +266,11 @@ export default function Projects() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease"
+      }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

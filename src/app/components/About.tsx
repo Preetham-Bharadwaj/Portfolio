@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { useReveal } from "../hooks/useReveal";
 import {
   Code2,
   Database,
@@ -71,11 +73,15 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 }
 
 export default function About() {
+  const [activeTab, setActiveTab] = useState("overview");
+  const { ref, visible } = useReveal();
+
   return (
     <section
       id="about"
       className="relative py-24 px-6 overflow-hidden"
       style={{ background: "#0a0e27" }}
+      ref={ref}
     >
       {/* Background accent */}
       <div
@@ -85,7 +91,11 @@ export default function About() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease"
+      }}>
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Text */}
           <motion.div

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { useReveal } from "../hooks/useReveal";
 
 const contactInfo = [
   { Icon: Mail, label: "Email", value: "preethambharadwajbr@gmail.com", href: "mailto:preethambharadwajbr@gmail.com", color: "#00d4ff" },
@@ -20,6 +21,7 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
   const [highlighted, setHighlighted] = useState(false);
+  const { ref, visible } = useReveal();
 
   // Listen for contact button click event
   useEffect(() => {
@@ -98,6 +100,7 @@ export default function Contact() {
       id="contact"
       className={`relative py-24 px-6 overflow-hidden transition-all duration-500 ${highlighted ? 'ring-2 ring-[#00d4ff] ring-opacity-50' : ''}`}
       style={{ background: "#0a0e27" }}
+      ref={ref}
     >
       {/* Background accents */}
       <div
@@ -113,7 +116,11 @@ export default function Contact() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(40px)",
+        transition: "opacity 0.7s ease, transform 0.7s ease"
+      }}>
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

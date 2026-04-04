@@ -8,6 +8,14 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
 import ContactCTA from "./components/ContactCTA";
+import AuroraBackground from "./components/AuroraBackground";
+import CustomCursor from "./components/CustomCursor";
+import SpotlightCursor from "./components/SpotlightCursor";
+import ParticleBurst from "./components/ParticleBurst";
+import ScrollProgressBar from "./components/ScrollProgressBar";
+import BackToTop from "./components/BackToTop";
+
+const isDesktop = typeof window !== "undefined" && !("ontouchstart" in window) && window.innerWidth >= 768;
 
 export default function App() {
   return (
@@ -20,6 +28,14 @@ export default function App() {
         overflowX: "hidden",
       }}
     >
+      {/* Visual Effects */}
+      <AuroraBackground />
+      {isDesktop && <CustomCursor />}
+      {isDesktop && <SpotlightCursor />}
+      <ParticleBurst />
+      <ScrollProgressBar />
+      <BackToTop />
+
       {/* Right-edge scroll progress */}
       <ScrollProgress />
 
