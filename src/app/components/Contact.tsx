@@ -11,8 +11,7 @@ const contactInfo = [
 const socials = [
   { Icon: Github, label: "GitHub", href: "https://github.com/Preetham-Bharadwaj", color: "#f8f9fa" },
   { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/preetham-bharadwaj-br-036077334", color: "#00d4ff" },
-  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/preetham_bharadwaj4?igsh=cXBhOW1iY2dldHBi", color: "#E4405F" },
-  { Icon: Twitter, label: "Twitter", href: "#", color: "#00d4ff" },
+  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/preetham_bharadwaj4", color: "#E4405F" },
 ];
 
 export default function Contact() {

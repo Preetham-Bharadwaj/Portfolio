@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Zap } from "lucide-react";
 import NavLabel from "./NavLabel";
 
 const navLinks = [
@@ -89,25 +88,53 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <button onClick={() => scrollTo("home")} className="flex items-center gap-2 group">
-            <div
-              className="w-8 h-8 rounded flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, #00d4ff, #b000ff)",
-                boxShadow: "0 0 15px rgba(0,212,255,0.5)",
-              }}
-            >
-              <Zap className="w-4 h-4 text-white" />
+          <button
+            onClick={() => scrollTo("home")}
+            className="flex items-center gap-3 group"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          >
+            {/* Code bracket logo */}
+            <div style={{ display: "flex", alignItems: "center", gap: "1px" }}>
+              <span style={{
+                fontFamily: "monospace",
+                fontSize: "1.4rem",
+                fontWeight: 900,
+                color: "#00d4ff",
+                lineHeight: 1,
+                textShadow: "0 0 10px rgba(0,212,255,0.6)",
+              }}>
+                &lt;
+              </span>
+              <span style={{
+                fontFamily: "monospace",
+                fontSize: "0.85rem",
+                fontWeight: 900,
+                color: "#ffffff",
+                padding: "0 2px",
+                letterSpacing: "0.05em",
+              }}>
+                PB
+              </span>
+              <span style={{
+                fontFamily: "monospace",
+                fontSize: "1.4rem",
+                fontWeight: 900,
+                color: "#b000ff",
+                lineHeight: 1,
+                textShadow: "0 0 10px rgba(176,0,255,0.6)",
+              }}>
+                /&gt;
+              </span>
             </div>
-            <span
-              className="text-xl"
-              style={{
-                fontFamily: "Orbitron, sans-serif",
-                fontWeight: 700,
-                color: "#f8f9fa",
-                letterSpacing: "0.1em",
-              }}
-            >
+
+            {/* Name text */}
+            <span style={{
+              fontFamily: "Orbitron, sans-serif",
+              fontSize: "1rem",
+              fontWeight: 700,
+              color: "#f8f9fa",
+              letterSpacing: "0.1em",
+            }}>
               PREETHAM<span style={{ color: "#00d4ff" }}>.</span>B
             </span>
           </button>
