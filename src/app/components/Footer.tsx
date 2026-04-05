@@ -63,18 +63,6 @@ export default function Footer() {
           </span>
         </div>
 
-        {/* Tagline */}
-        <p style={{
-          fontFamily: "Cabin, sans-serif",
-          fontSize: "0.85rem",
-          color: "rgba(248,249,250,0.4)",
-          textAlign: "center",
-          maxWidth: "320px",
-          lineHeight: 1.6,
-        }}>
-          Building real-world solutions with code.
-        </p>
-
         {/* Social Icons */}
         <div style={{ display: "flex", gap: "12px" }}>
           {socials.map(({ href, label, Icon }) => (

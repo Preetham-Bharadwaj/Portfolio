@@ -13,7 +13,6 @@ import CustomCursor from "./components/CustomCursor";
 import SpotlightCursor from "./components/SpotlightCursor";
 import ParticleBurst from "./components/ParticleBurst";
 import ScrollProgressBar from "./components/ScrollProgressBar";
-import BackToTop from "./components/BackToTop";
 
 const isDesktop = typeof window !== "undefined" && !("ontouchstart" in window) && window.innerWidth >= 768;
 
@@ -34,7 +33,6 @@ export default function App() {
       {isDesktop && <SpotlightCursor />}
       <ParticleBurst />
       <ScrollProgressBar />
-      <BackToTop />
 
       {/* Right-edge scroll progress */}
       <ScrollProgress />

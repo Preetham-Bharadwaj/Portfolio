@@ -93,19 +93,18 @@ export default function About() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto" style={{
+      <div className="max-w-4xl mx-auto px-6" style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(40px)",
         transition: "opacity 0.7s ease, transform 0.7s ease"
       }}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-          >
+        {/* Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
             <SectionTitle>
               Mission:{" "}
               <span
@@ -288,72 +287,7 @@ export default function About() {
                 </a>
               </div>
             </motion.div>
-          </motion.div>
-
-          {/* Right: Tech Icon Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            {/* Glow background */}
-            <div
-              className="absolute inset-0 rounded-3xl pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(ellipse at center, rgba(0,212,255,0.05) 0%, transparent 70%)",
-              }}
-            />
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
-              {techIcons.map(({ Icon, label, color }, i) => (
-                <motion.div
-                  key={label}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: false }}
-                  whileHover={{ scale: 1.15, y: -6 }}
-                  transition={{
-                    duration: 0.4,
-                    delay: i * 0.05,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                  }}
-                  className="flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-4 rounded-xl cursor-pointer"
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: `1px solid ${color}22`,
-                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = color + "66";
-                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 20px ${color}22`;
-                    (e.currentTarget as HTMLElement).style.background = `${color}08`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = color + "22";
-                    (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                    (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
-                  }}
-                >
-                  <Icon className="w-5 h-5 sm:w-7 sm:h-7" style={{ color }} />
-                  <span
-                    style={{
-                      fontFamily: "Cabin, sans-serif",
-                      fontSize: "0.6rem",
-                      color: "rgba(248,249,250,0.55)",
-                      letterSpacing: "0.05em",
-                    }}
-                  >
-                    {label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
